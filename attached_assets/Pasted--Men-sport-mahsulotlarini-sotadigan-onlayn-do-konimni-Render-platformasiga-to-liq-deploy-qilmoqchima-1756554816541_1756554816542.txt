@@ -1,0 +1,43 @@
+"Men sport mahsulotlarini sotadigan onlayn do'konimni Render platformasiga to'liq deploy qilmoqchiman. Iltimos, quyidagi talablarga mos ravishda loyihani Render ga joylang:
+
+📦 Loyiha tuzilmasi:
+Frontend: React.js / Vue.js / HTML+CSS+JS (build papkasi dist yoki build)
+Backend: Node.js (Express) / Python (Flask/Django) / PHP (Laravel)
+Database: PostgreSQL (Render da PostgreSQL service oching)
+Environment variables: .env faylidan foydalaniladi
+☁️ Render ga joylash talablari:
+1. Web Service sozlamalari:
+Service Type: Web Service
+Build Command: npm run build (React uchun) yoki mos keladigan build komanda
+Start Command: npm start (Node.js uchun) yoki mos keladigan start komanda
+Auto Deploy: GitHub repository bilan bog'lang, har push qilganda avtomatik deploy bo'lsin
+Environment Variables: quyidagilarni kiriting:
+DATABASE_URL (PostgreSQL ulanish uchun)
+JWT_SECRET (foydalanuvchi autentifikatsiya uchun)
+PORT (agar kerak bo'lsa, masalan: 10000)
+2. PostgreSQL Database sozlamalari:
+Service Type: PostgreSQL
+Instance Size: Free (test uchun) yoki $7/oy (ishlab chiqish uchun)
+Database Name: sportshop_db
+Username: sportuser
+Password: xavfsiz parol (masalan: SportPass123!)
+Database URL ni Web Service ga DATABASE_URL sifatida o'tkazing
+3. Domen va SSL:
+Custom Domain: sportmarket.uz (agar domen bo'lsa)
+SSL Certificate: avtomatik o'rnatilsin
+www versiyasi ham yo'naltirilsin
+4. Deploy qilish jarayoni:
+GitHub repository: https://github.com/username/sport-shop
+Branch: main
+Build loglarini ko'rsating
+Muvaffaqiyatli deploy bo'lgandan so'ng URL berilsin (masalan: https://sportshop.onrender.com)
+5. Qo'shimcha sozlamalar:
+Health Check Path: /api/health (server ishlashini tekshirish uchun)
+Auto Scaling: yoqilmagan (hali kerak emas)
+Preview Environment: yangi branch uchun avtomatik test muhitini ochish
+📋 Talablarga javob beruvchi narsalar:
+Web Service va Database URL larini berilsin
+Deploy loglari (muvaffaqiyatli yoki xato bo'lsa ham)
+.env fayl namunasi
+Agar xatolar bo'lsa, ularni tushuntiring va hal qilish yo'lini ko'rsating
+Iltimos, barcha sozlamalarni amalga oshiring va loyiha to'liq ishlaydigan holatga keltirilsin. Sayt real serverda ishlashi, foydalanuvchilar kirishi mumkin bo'lishi kerak." 
