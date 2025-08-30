@@ -13,6 +13,8 @@ import ProductDetail from "@/pages/product-detail.tsx";
 import Cart from "@/pages/cart.tsx";
 import Checkout from "@/pages/checkout.tsx";
 import Contact from "@/pages/contact.tsx";
+import Blog from "@/pages/blog.tsx";
+import About from "@/pages/about.tsx";
 import Login from "@/pages/login.tsx";
 import Register from "@/pages/register.tsx";
 import Profile from "@/pages/profile.tsx";
@@ -28,6 +30,8 @@ function Router() {
       <Route path="/cart" component={Cart} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/contact" component={Contact} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/about" component={About} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/profile" component={Profile} />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Search, ShoppingCart, Menu, X, User, LogIn, UserPlus, Settings } from 'lucide-react';
+import { Search, ShoppingCart, Menu, X, User, LogIn, UserPlus, Settings, Zap, Percent, BookOpen, Info, Phone } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -27,54 +27,76 @@ export function Header() {
   };
 
   const navigationLinks = [
-    { href: '/', label: 'Bosh sahifa' },
-    { href: '/products', label: 'Mahsulotlar' },
-    { href: '/products?filter=special', label: 'Aksiyalar' },
-    { href: '/contact', label: 'Aloqa' },
+    { href: '/', label: 'Bosh sahifa', icon: null },
+    { href: '/products', label: 'Mahsulotlar', icon: null },
+    { href: '/products?filter=special', label: 'Aksiyalar', icon: Percent },
+    { href: '/blog', label: 'Blog', icon: BookOpen },
+    { href: '/about', label: 'Biz haqimizda', icon: Info },
+    { href: '/contact', label: 'Aloqa', icon: Phone },
   ];
 
   const totalItems = getTotalItems();
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border professional-shadow">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-18 lg:h-22">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-3" data-testid="logo-link">
-              <img 
-                src={logoUrl} 
-                alt="SportZone Logo" 
-                className="h-16 lg:h-20 w-auto object-contain"
-              />
+            <Link href="/" className="flex items-center space-x-3 group" data-testid="logo-link">
+              <div className="relative">
+                <img 
+                  src={logoUrl} 
+                  alt="SportZone Logo" 
+                  className="h-14 lg:h-18 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute -inset-2 bg-primary/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <div className="hidden sm:block">
+                <h1 className="text-2xl font-montserrat font-bold text-primary">SportZone</h1>
+                <p className="text-xs text-muted-foreground font-inter">Sport dunyosi</p>
+              </div>
             </Link>
             
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              {navigationLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-foreground hover:text-primary transition-colors font-medium"
-                  data-testid={`nav-link-${link.label.toLowerCase().replace(' ', '-')}`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <nav className="hidden lg:flex items-center space-x-1">
+              {navigationLinks.map((link) => {
+                const IconComponent = link.icon;
+                return (
+                  <Link key={link.href} href={link.href}>
+                    <Button 
+                      variant="ghost" 
+                      className="text-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300 font-medium px-4 py-2 rounded-lg group"
+                      data-testid={`nav-link-${link.label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
+                    >
+                      {IconComponent && <IconComponent className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform duration-300" />}
+                      {link.label}
+                    </Button>
+                  </Link>
+                );
+              })}
             </nav>
             
             {/* Search Bar */}
-            <div className="hidden md:flex flex-1 max-w-md mx-8">
-              <form onSubmit={handleSearch} className="relative w-full">
+            <div className="hidden md:flex flex-1 max-w-lg mx-8">
+              <form onSubmit={handleSearch} className="relative w-full group">
                 <Input
                   type="text"
                   placeholder="Mahsulot qidirish..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2"
+                  className="pl-12 pr-12 py-3 rounded-full border-2 focus:border-primary transition-all duration-300 bg-background/80 backdrop-blur-sm"
                   data-testid="search-input"
                 />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5 group-focus-within:text-primary transition-colors duration-300" />
+                <Button 
+                  type="submit" 
+                  size="sm" 
+                  className="absolute right-1 top-1/2 transform -translate-y-1/2 rounded-full h-8 w-8 p-0"
+                  data-testid="search-submit"
+                >
+                  <Search className="h-4 w-4" />
+                </Button>
               </form>
             </div>
             
@@ -139,24 +161,27 @@ export function Header() {
                 </div>
               )}
 
-              {/* Cart */}
+              {/* Professional Cart */}
               <Button
                 variant="ghost"
-                size="icon"
                 onClick={() => setIsCartOpen(true)}
-                className="relative"
+                className="relative p-3 hover:bg-primary/10 transition-all duration-300 group rounded-full"
                 data-testid="cart-button"
               >
-                <ShoppingCart className="h-5 w-5" />
-                {totalItems > 0 && (
-                  <Badge
-                    variant="secondary"
-                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center text-xs cart-badge"
-                    data-testid="cart-badge"
-                  >
-                    {totalItems}
-                  </Badge>
-                )}
+                <div className="relative">
+                  <ShoppingCart className="h-6 w-6 text-foreground group-hover:text-primary transition-colors duration-300" />
+                  {totalItems > 0 && (
+                    <Badge
+                      className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs bg-accent text-accent-foreground animate-pulse"
+                      data-testid="cart-badge"
+                    >
+                      {totalItems}
+                    </Badge>
+                  )}
+                </div>
+                <span className="ml-2 hidden sm:inline font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                  Savat
+                </span>
               </Button>
               
               {/* Mobile Menu Button */}

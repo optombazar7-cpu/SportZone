@@ -1,0 +1,77 @@
+🎨 Prompt (5-bosqich uchun — Professional darajali sayt):
+"Men sport mahsulotlarini sotadigan onlayn do'konimni professional darajaga ko'tarmoqchiman. Hozirgi sayt sodda ko'rinyapti, lekin endi zamonaviy, dinamik va mijozlarni jalb qiluvchi professional ko'rinishga ega bo'lishi kerak.
+
+🎯 Umumiy talablari:
+Zamonaviy UI/UX dizayn
+Mijozlarni jalb qiluvchi interfeys
+SEO optimallashtirilgan
+Tez ishlaydigan va responsiv
+Biznes uchun tayyor
+🎨 Dizayn talablari:
+1. Header (Yuqori menyu):
+Logotip chapda
+Menyu: Bosh sahifa, Mahsulotlar, Aksiyalar, Blog, Biz haqimizda, Aloqa
+Qidiruv maydoni
+Foydalanuvchi kabineti (kirish/ro'yxatdan o'tish)
+Savat ikonkasi (mahsulotlar soni bilan)
+2. Bosh sahifa (Hero Section):
+Katta banner rasm (sportchi yoki mahsulotlar bilan)
+Asosiy CTA tugmalar: "Hozir xarid qiling", "Yangi mahsulotlar"
+Qisqacha slogan (masalan: "Sport bilan hayotingizni o'zgartiring!")
+3. Mahsulotlar bo'limi:
+Kategoriyalar bo'yicha filtrlar
+"Eng ko'p sotilganlar", "Yangi mahsulotlar", "Chegirmalar"
+Har bir mahsulot uchun card dizayn:
+Rasm, nomi, narxi, reyting (yulduzchalar)
+"Savatga qo'shish" tugmasi
+4. Aksiyalar bo'limi:
+Chegirmadagi mahsulotlar
+Vaqt hisoblagichi (agar chegirma vaqti cheklangan bo'lsa)
+Katta CTA: "Chegirmalarni ko'rish"
+5. Foydalanuvchi kabineti:
+Kirish/ro'yxatdan o'tish sahifalari
+Profil sahifasi: ma'lumotlar, buyurtmalar tarixi, sevimlilar
+Manzillar sahifasi
+6. Admin panel:
+Mahsulotlarni boshqarish (qo'shish, tahrirlash, o'chirish)
+Buyurtmalarni kuzatish
+Foydalanuvchilarni boshqarish
+Hisobotlar (savdo statistikasi)
+7. Footer (Pastki qism):
+Foydali havolalar: Qaytish siyosati, yetkazib berish, savol-javob
+Ijtimoiy tarmoqlar
+Email obuna maydoni
+Kontakt ma'lumotlari
+⚙️ Funksionallik talablari:
+1. Mahsulotlar sahifasi:
+Yuqori sifatli rasmlar (zoom funksiyasi)
+Tavsif, narx, o'lchamlar, ranglar
+Reyting va sharhlar
+O'xshash mahsulotlar
+2. Savat va buyurtma:
+Mahsulotlarni miqdorini o'zgartirish
+Umumiy narxni hisoblash
+Yetkazib berish va to'lov usullari
+Buyurtmani tasdiqlash
+3. To'lov integratsiyasi:
+Click, Payme, Uzcard/Paynet (test rejimida ham bo'lishi mumkin)
+To'lov muvaffaqiyatli bo'lgandan keyin xabar
+4. Email xabarlar:
+Ro'yxatdan o'tganda xush kelibsiz
+Buyurtma qilinganda tasdiqlash
+Buyurtma holati o'zgarganda yangilanish
+📱 Responsivlik:
+Barcha qurilmalarda (mobil, planshet, kompyuter) mukammal ko'rinish
+Tezkor yuklanish
+Touch-friendly interfeys
+🚀 Texnik talablari:
+Tez ishlash (Google PageSpeed 90+ ball)
+SEO optimallashtirilgan
+Xavfsizlik (XSS, CSRF himoya)
+Muntazam backup
+📊 Marketing tayyorgarlik:
+Google Analytics integratsiyasi
+Meta teglar optimallashtirilgan
+Sitemap.xml va robots.txt
+Social media share tugmalari
+Iltimos, barcha talablarga mos ravishda professional darajali sport do'kon saytini yarating. Sayt zamonaviy, chiroyli va biznes uchun tayyor bo'lishi kerak." 

@@ -44,69 +44,84 @@ export function ProductCard({ product, showQuickAdd = true }: ProductCardProps) 
     : 0;
 
   return (
-    <div className="bg-card rounded-xl shadow-lg overflow-hidden product-card group cursor-pointer" data-testid={`product-card-${product.id}`}>
+    <div className="bg-card rounded-2xl professional-shadow overflow-hidden product-card group cursor-pointer hover:shadow-2xl transition-all duration-500 border border-border/50" data-testid={`product-card-${product.id}`}>
       <Link href={`/product/${product.id}`}>
-        <div className="relative">
+        <div className="relative overflow-hidden">
           <img 
             src={product.imageUrl} 
             alt={product.name}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
             data-testid={`product-image-${product.id}`}
           />
           
-          {/* Badges */}
-          <div className="absolute top-3 left-3 space-y-1">
+          {/* Professional Badges */}
+          <div className="absolute top-4 left-4 space-y-2">
             {product.isSpecialOffer && discountPercentage > 0 && (
-              <Badge variant="secondary" className="text-xs font-semibold" data-testid={`discount-badge-${product.id}`}>
+              <Badge className="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full shadow-lg" data-testid={`discount-badge-${product.id}`}>
                 -{discountPercentage}%
               </Badge>
             )}
             {product.isBestSeller && (
-              <Badge className="bg-accent text-accent-foreground text-xs font-semibold" data-testid={`bestseller-badge-${product.id}`}>
-                <Flame className="h-3 w-3 mr-1" />
+              <Badge className="bg-gradient-to-r from-amber-400 to-orange-500 text-white text-sm font-bold px-3 py-1 rounded-full shadow-lg" data-testid={`bestseller-badge-${product.id}`}>
+                <Flame className="h-4 w-4 mr-1" />
                 TOP
               </Badge>
             )}
           </div>
+
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
         </div>
         
-        <div className="p-4">
-          <h3 className="font-poppins font-semibold text-foreground mb-2" data-testid={`product-name-${product.id}`}>
+        <div className="p-6">
+          <h3 className="font-poppins font-bold text-lg text-foreground mb-3 leading-tight group-hover:text-primary transition-colors duration-300" data-testid={`product-name-${product.id}`}>
             {product.name}
           </h3>
           
-          <p className="text-sm text-muted-foreground mb-3 line-clamp-2" data-testid={`product-description-${product.id}`}>
+          <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed" data-testid={`product-description-${product.id}`}>
             {product.description}
           </p>
           
-          <div className="flex items-center space-x-2 mb-3">
-            <span className="text-lg font-bold text-foreground" data-testid={`product-price-${product.id}`}>
+          <div className="flex items-baseline space-x-3 mb-4">
+            <span className="text-2xl font-bold text-primary font-montserrat" data-testid={`product-price-${product.id}`}>
               {formatPrice(product.price)}
             </span>
             {product.originalPrice && (
-              <span className="text-sm text-muted-foreground line-through" data-testid={`product-original-price-${product.id}`}>
+              <span className="text-lg text-muted-foreground line-through font-medium" data-testid={`product-original-price-${product.id}`}>
                 {formatPrice(product.originalPrice)}
               </span>
             )}
+          </div>
+
+          {/* Rating Stars (Static for now) */}
+          <div className="flex items-center mb-4">
+            <div className="flex text-amber-400">
+              {'★'.repeat(5)}
+            </div>
+            <span className="ml-2 text-sm text-muted-foreground">(4.8)</span>
           </div>
         </div>
       </Link>
       
       {showQuickAdd && (
-        <div className="flex items-center justify-between p-4 pt-0">
-          <Link href={`/product/${product.id}`}>
-            <Button variant="outline" size="sm" data-testid={`view-details-${product.id}`}>
+        <div className="flex items-center gap-3 p-6 pt-0">
+          <Link href={`/product/${product.id}`} className="flex-1">
+            <Button 
+              variant="outline" 
+              className="w-full border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all duration-300 font-medium"
+              data-testid={`view-details-${product.id}`}
+            >
               Batafsil
             </Button>
           </Link>
           
           <Button 
-            size="sm" 
-            className="btn-accent"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
             onClick={handleAddToCart}
             data-testid={`add-to-cart-${product.id}`}
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4 mr-2 group-hover:rotate-90 transition-transform duration-300" />
+            Savatga
           </Button>
         </div>
       )}

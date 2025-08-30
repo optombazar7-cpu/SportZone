@@ -264,7 +264,7 @@ export default function Products() {
                       <Checkbox
                         id="special-offers"
                         checked={showSpecialOffers}
-                        onCheckedChange={setShowSpecialOffers}
+                        onCheckedChange={(checked) => setShowSpecialOffers(checked === true)}
                         data-testid="filter-special-offers"
                       />
                       <Label htmlFor="special-offers" className="text-sm cursor-pointer">
@@ -275,7 +275,7 @@ export default function Products() {
                       <Checkbox
                         id="in-stock"
                         checked={showInStock}
-                        onCheckedChange={setShowInStock}
+                        onCheckedChange={(checked) => setShowInStock(checked === true)}
                         data-testid="filter-in-stock"
                       />
                       <Label htmlFor="in-stock" className="text-sm cursor-pointer">

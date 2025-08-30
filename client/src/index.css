@@ -72,6 +72,42 @@
     background: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(4 86% 58%) 100%);
   }
 
+  .hero-section {
+    background: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(4 86% 58%) 50%, hsl(25 95% 53%) 100%);
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .professional-shadow {
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .professional-shadow:hover {
+    box-shadow: 
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .btn-accent {
+    background: linear-gradient(135deg, hsl(25 95% 53%) 0%, hsl(4 86% 58%) 100%);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+  }
+
+  .btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -10px rgba(251, 146, 60, 0.4);
+  }
+
   .product-card {
     transition: all 0.3s ease;
   }
