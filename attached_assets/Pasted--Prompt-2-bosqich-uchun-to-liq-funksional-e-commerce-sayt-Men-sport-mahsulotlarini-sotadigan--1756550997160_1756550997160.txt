@@ -1,0 +1,59 @@
+ Prompt (2-bosqich uchun — to'liq funksional e-commerce sayt):
+"Men sport mahsulotlarini sotadigan professional onlayn do'kon yaratmoqchiman. Iltimos, quyidagi talablarga to'liq javob beradigan, zamonaviy va to'liq funksional veb-sayt yarating. Sayt to'liq ishlaydigan e-commerce platforma bo'lishi kerak — foydalanuvchi mahsulot tanlaydi, savatga qo'shadi, buyurtma beradi va to'lov qiladi.
+
+💻 Sayt talablari:
+Bosh sahifa (Home Page): 
+Slider (karusel) — aksiya va yangi mahsulotlar.
+Kategoriyalar bo'yicha tezkor kirish (Erkaklar, Ayollar, Bolalar, Jihozlar).
+“Eng ko'p sotilganlar”, “Yangi mahsulotlar”, “Chegirmalar” bo'limlari.
+CTA tugmalar (Masalan: “Hozir xarid qiling”, “Ko'proq ko'rish”).
+Mahsulotlar sahifasi (Products Page): 
+Kategoriyalarga bo'lingan (masalan: Futbolka, shim, poyabzal, to'p, shina, fitnes jihozlari).
+Filtr va saralash: narx bo'yicha, yangi/yoshi, reyting.
+Har bir mahsulot uchun rasm, nomi, narxi, qisqacha tavsifi.
+Mahsulot ichki sahifasi (Product Detail Page): 
+Yuqori sifatli rasmlar (zoom funksiyasi).
+Tavsif, narx, o'lchamlar (S/M/L/XL), soni tanlash.
+“Savatga qo'shish” tugmasi.
+O'xshash mahsulotlar.
+Savat (Shopping Cart): 
+Foydalanuvchi tanlagan barcha mahsulotlar ro'yxati.
+Miqdorni o'zgartirish, o'chirish.
+Umumiy narxni hisoblash.
+“Buyurtma berish” tugmasi.
+Buyurtma berish (Checkout Page): 
+Foydalanuvchi ma'lumotlari: ism, telefon, email.
+Yetkazib berish manzili.
+To'lov usullari: Naqd, Click, Payme (simulyatsiya).
+Buyurtmani yakunlash tugmasi.
+Buyurtma muvaffaqiyatli yuborilganda “rahmat” sahifasi.
+Aksiyalar sahifasi (Deals/Offers): 
+Chegirmadagi mahsulotlar.
+Vaqt tugash sanasi (agar bo'lsa).
+Aloqa sahifasi (Contact Page): 
+Kontakt ma'lumotlari (telefon, email, manzil).
+Google Maps xaritasi.
+Foydalanuvchi murojaati uchun forma (ism, email, xabar).
+Footer: 
+Foydali havolalar: Qaytish siyosati, yetkazib berish, savol-javob.
+Ijtimoiy tarmoq havolalari.
+Email obuna maydoni.
+🎨 Dizayn talablari:
+Zamonaviy, sportga mos, dinamik dizayn.
+Asosiy ranglar: ko'k, qizil, oq, jigar rang.
+Responsive (mobil, planshet, kompyuter uchun moslashuvchan).
+Tez yuklanadigan rasmlar.
+Oddiy navigatsiya, tushunarli menyu.
+⚙️ Texnik talablari:
+HTML5, CSS3, JavaScript (React yoki oddiy JS).
+Backend (agar AI qo'llab-quvvatlasa): mahsulotlar bazasi, foydalanuvchi buyurtmalari saqlanishi.
+Mahsulotlar JSON formatda saqlanishi (masalan, nomi, narxi, tavsifi, rasmi).
+Savat ma'lumotlari localStorage yoki cookie orqali saqlansin.
+To'lov tizimi simulyatsiya qilinsa ham bo'ladi.
+SEO optimallashtirilgan — har bir sahifada meta teglar, tavsiflar.
+Iltimos, sayt kodlarini tayyor holatda berib, kerak bo'lsa fayl tuzilmasini ham tushuntiring. Sayt tez ishlashi, foydalanuvchi uchun qulay bo'lishi kerak." 
+
+🧠 Qo'shimcha takliflar:
+Admin panel (mahsulot qo'shish, buyurtmalarni ko'rish uchun) — agar AI qo'llab-quvvatlansa.
+Telegram bot integratsiyasi — buyurtma holatini kuzatish uchun.
+Email xabarlar — buyurtma qilinganda foydalanuvchiga avtomatik xabar yuborish.
