@@ -1,0 +1,224 @@
+import React, { useState } from 'react';
+import { Link, useLocation } from 'wouter';
+import { Search, ShoppingCart, Menu, X, User, LogIn, UserPlus, Settings } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { useCart } from '@/contexts/cart-context';
+import { useAuth } from '@/contexts/auth-context';
+import { CartModal } from './cart-modal.tsx';
+import logoUrl from '../assets/logo.png';
+
+export function Header() {
+  const [, setLocation] = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const { getTotalItems } = useCart();
+  const { user, logout } = useAuth();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      setLocation(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+    }
+  };
+
+  const navigationLinks = [
+    { href: '/', label: 'Bosh sahifa' },
+    { href: '/products', label: 'Mahsulotlar' },
+    { href: '/products?filter=special', label: 'Aksiyalar' },
+    { href: '/contact', label: 'Aloqa' },
+  ];
+
+  const totalItems = getTotalItems();
+
+  return (
+    <>
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16 lg:h-20">
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-3" data-testid="logo-link">
+              <img 
+                src={logoUrl} 
+                alt="SportZone Logo" 
+                className="h-16 lg:h-20 w-auto object-contain"
+              />
+            </Link>
+            
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8">
+              {navigationLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-foreground hover:text-primary transition-colors font-medium"
+                  data-testid={`nav-link-${link.label.toLowerCase().replace(' ', '-')}`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+            
+            {/* Search Bar */}
+            <div className="hidden md:flex flex-1 max-w-md mx-8">
+              <form onSubmit={handleSearch} className="relative w-full">
+                <Input
+                  type="text"
+                  placeholder="Mahsulot qidirish..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 pr-4 py-2"
+                  data-testid="search-input"
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              </form>
+            </div>
+            
+            {/* User Menu, Cart & Mobile Menu */}
+            <div className="flex items-center space-x-4">
+              {/* User Menu */}
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" data-testid="user-menu-trigger">
+                      <div className="w-8 h-8 hero-gradient rounded-full flex items-center justify-center">
+                        <User className="h-4 w-4 text-white" />
+                      </div>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <div className="flex items-center justify-start gap-2 p-2">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium">{user.firstName} {user.lastName}</p>
+                        <p className="text-xs text-muted-foreground">{user.email}</p>
+                      </div>
+                    </div>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/profile" className="cursor-pointer" data-testid="menu-profile">
+                        <User className="mr-2 h-4 w-4" />
+                        Profil
+                      </Link>
+                    </DropdownMenuItem>
+                    {user.isAdmin && (
+                      <>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                          <Link href="/admin" className="cursor-pointer" data-testid="menu-admin">
+                            <Settings className="mr-2 h-4 w-4" />
+                            Admin Panel
+                          </Link>
+                        </DropdownMenuItem>
+                      </>
+                    )}
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={logout} className="cursor-pointer text-red-600" data-testid="menu-logout">
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Chiqish
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <div className="hidden lg:flex items-center space-x-2">
+                  <Button variant="ghost" size="sm" asChild data-testid="button-login">
+                    <Link href="/login">
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Kirish
+                    </Link>
+                  </Button>
+                  <Button size="sm" asChild data-testid="button-register">
+                    <Link href="/register">
+                      <UserPlus className="mr-2 h-4 w-4" />
+                      Ro'yxat
+                    </Link>
+                  </Button>
+                </div>
+              )}
+
+              {/* Cart */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsCartOpen(true)}
+                className="relative"
+                data-testid="cart-button"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                {totalItems > 0 && (
+                  <Badge
+                    variant="secondary"
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center text-xs cart-badge"
+                    data-testid="cart-badge"
+                  >
+                    {totalItems}
+                  </Badge>
+                )}
+              </Button>
+              
+              {/* Mobile Menu Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="lg:hidden"
+                data-testid="mobile-menu-button"
+              >
+                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Mobile Menu */}
+        <div className={`mobile-menu fixed top-0 left-0 w-full h-full bg-background z-50 lg:hidden ${isMenuOpen ? 'open' : ''}`}>
+          <div className="p-4">
+            <div className="flex justify-between items-center mb-8">
+              <img 
+                src={logoUrl} 
+                alt="SportZone Logo" 
+                className="h-12 w-auto object-contain"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMenuOpen(false)}
+                data-testid="mobile-menu-close"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            <nav className="space-y-6">
+              {navigationLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block text-lg font-medium text-foreground"
+                  onClick={() => setIsMenuOpen(false)}
+                  data-testid={`mobile-nav-${link.label.toLowerCase().replace(' ', '-')}`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+            <form onSubmit={handleSearch} className="mt-8">
+              <Input
+                type="text"
+                placeholder="Mahsulot qidirish..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-4 pr-4 py-3"
+                data-testid="mobile-search-input"
+              />
+            </form>
+          </div>
+        </div>
+      </header>
+      
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+    </>
+  );
+}
