@@ -42,7 +42,7 @@ export function Header() {
               <img 
                 src={logoUrl} 
                 alt="SportZone Logo" 
-                className="h-10 lg:h-12 w-auto object-contain"
+                className="h-14 lg:h-16 w-auto object-contain"
               />
             </Link>
             
@@ -117,7 +117,7 @@ export function Header() {
               <img 
                 src={logoUrl} 
                 alt="SportZone Logo" 
-                className="h-8 w-auto object-contain"
+                className="h-10 w-auto object-contain"
               />
               <Button
                 variant="ghost"
