@@ -1,0 +1,54 @@
+🛠️ Prompt (3-bosqich uchun — admin panel, foydalanuvchi kabineti, to'lov integratsiyasi):
+"Men sport mahsulotlarini sotadigan onlayn do'konimni professional darajada yakunlamoqchiman. Iltimos, quyidagi kengaytirilgan funksiyalar bilan to'liq ishlaydigan e-commerce platforma yarating:
+
+🔐 Foydalanuvchi kabineti (User Dashboard):
+Kirish/ro'yxatdan o'tish (login/register).
+Shaxsiy ma'lumotlarni tahrirlash.
+Oldingi buyurtmalar tarixi.
+Sevimli mahsulotlar ro'yxati.
+Mening manzillarim (bir nechta yetkazib berish manzillari).
+👨‍💼 Admin panel (Admin Dashboard):
+Mahsulotlarni qo'shish, tahrirlash, o'chirish.
+Buyurtmalarni ko'rish va ularning holatini o'zgartirish (yangi, qayta ishlanyapti, jo'natilmoqda, yetkazilgan).
+Foydalanuvchilarni boshqarish.
+Aksiya va chegirmalarni boshqarish.
+Hisobotlar (oylik savdo, eng ko'p sotilgan mahsulotlar).
+Sayt statistikasi (tashriflar, eng ko'p ko'rilgan mahsulotlar).
+💰 To'lov tizimlarini integratsiya qilish:
+Click, Payme, Uzcard/Paynet to'lov tizimlarini simulyatsiya qiling (test rejimida).
+To'lov muvaffaqiyatli bo'lgandan so'ng buyurtma holatini yangilash.
+Foydalanuvchiga to'lov haqida email yuborish.
+📱 Mobil versiya optimallashtirilgan:
+Barcha sahifalar telefonlarda qulay ko'rinishi kerak.
+Tezkor navigatsiya, tez savatga qo'shish.
+📧 Email xabarlar:
+Ro'yxatdan o'tganda xush kelibsiz email.
+Buyurtma qilinganda tasdiqlash xabari.
+Buyurtma holati o'zgarganda yangilanish.
+Aksiya va chegirmalar haqida xabarlar.
+🔍 Qidiruv va filtrlar:
+Mahsulotlarni nomi, kategoriyasi, narxi bo'yicha qidirish.
+Filtrlar: narx oralig'i, rang, o'lcham, brend.
+📊 SEO va marketing:
+Har bir sahifa uchun meta teglar (title, description).
+Mahsulot sahifalariga structured data (schema.org) qo'shish.
+Google Analytics kodini integratsiya qilish.
+Sitemap.xml va robots.txt fayllarini yaratish.
+🛡️ Xavfsizlik:
+Parolni xavfsiz saqlash (bcrypt).
+XSS va CSRF hujumlaridan himoya.
+Foydalanuvchi ma'lumotlarini himoyalash.
+🗃️ Ma'lumotlar bazasi:
+Mahsulotlar, foydalanuvchilar, buyurtmalar uchun ma'lumotlar bazasini yaratish.
+JSON yoki SQLite formatda (agar frontend loyiqa bo'lsa).
+📁 Fayl tuzilmasi:
+Frontend: HTML/CSS/JS papkalari.
+Backend: API, database, routes, controllers.
+Assets: images, icons, fonts.
+Documentation: Loyihaning qisqacha tavsifi va ishlatish bo'yicha ko'rsatmalar.
+Iltimos, barcha kodlar tayyor holatda, izohlar bilan berilsin. Agar bu AI platforma backend qo'llab-quvvatlamasa ham, struktura va kodlar tushunarli bo'lsin. Sayt professional darajada ishlashi, real do'kon sifatida foydalanish mumkin bo'lishi kerak." 
+
+🎯 Qo'shimcha takliflar 
+Telegram bot — buyurtma holatini kuzatish, yangiliklar olish.
+CRM integratsiyasi — mijozlar bilan muloqotni avtomatlashtirish.
+Push-xabarlar — chegirmalar va aksiyalar haqida foydalanuvchilarga xabar berish.

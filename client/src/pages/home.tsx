@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ArrowRight, Truck, Shield, Headphones } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/product-card';
+import { SEOHead, seoConfigs } from '@/components/SEOHead';
 import type { Product } from '@shared/schema';
 
 export default function Home() {
@@ -60,6 +61,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead {...seoConfigs.home} />
       {/* Hero Section */}
       <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center" data-testid="hero-section">
         <div className="absolute inset-0 hero-gradient opacity-90"></div>

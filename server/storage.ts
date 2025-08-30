@@ -1,11 +1,25 @@
-import { type User, type InsertUser, type Product, type InsertProduct, type CartItem, type InsertCartItem, type Order, type InsertOrder, type OrderItem, type InsertOrderItem } from "@shared/schema";
+import { type User, type InsertUser, type LoginUser, type UserAddress, type InsertUserAddress, type Favorite, type InsertFavorite, type Product, type InsertProduct, type CartItem, type InsertCartItem, type Order, type InsertOrder, type OrderItem, type InsertOrderItem } from "@shared/schema";
 import { randomUUID } from "crypto";
+import bcrypt from 'bcrypt';
 
 export interface IStorage {
   // User methods
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  updateUser(id: string, updates: Partial<InsertUser>): Promise<User | undefined>;
+  
+  // User address methods
+  getUserAddresses(userId: string): Promise<UserAddress[]>;
+  createUserAddress(address: InsertUserAddress): Promise<UserAddress>;
+  updateUserAddress(id: string, updates: Partial<InsertUserAddress>): Promise<UserAddress | undefined>;
+  deleteUserAddress(id: string): Promise<boolean>;
+  
+  // Favorites methods
+  getUserFavorites(userId: string): Promise<(Favorite & { product: Product })[]>;
+  addToFavorites(favorite: InsertFavorite): Promise<Favorite>;
+  removeFromFavorites(userId: string, productId: string): Promise<boolean>;
 
   // Product methods
   getProducts(): Promise<Product[]>;
@@ -36,6 +50,8 @@ export class MemStorage implements IStorage {
   private cartItems: Map<string, CartItem>;
   private orders: Map<string, Order>;
   private orderItems: Map<string, OrderItem>;
+  private userAddresses: Map<string, UserAddress>;
+  private favorites: Map<string, Favorite>;
 
   constructor() {
     this.users = new Map();
@@ -43,7 +59,10 @@ export class MemStorage implements IStorage {
     this.cartItems = new Map();
     this.orders = new Map();
     this.orderItems = new Map();
+    this.userAddresses = new Map();
+    this.favorites = new Map();
     this.initializeProducts();
+    this.initializeAdminUser();
   }
 
   private initializeProducts() {
@@ -306,11 +325,99 @@ export class MemStorage implements IStorage {
     );
   }
 
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    return Array.from(this.users.values()).find(
+      (user) => user.email === email,
+    );
+  }
+
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
+    const user: User = { 
+      ...insertUser, 
+      id,
+      phone: insertUser.phone ?? null,
+      isAdmin: insertUser.isAdmin ?? false,
+      createdAt: new Date()
+    };
     this.users.set(id, user);
     return user;
+  }
+
+  async updateUser(id: string, updates: Partial<InsertUser>): Promise<User | undefined> {
+    const user = this.users.get(id);
+    if (!user) return undefined;
+    
+    const updatedUser = { ...user, ...updates };
+    this.users.set(id, updatedUser);
+    return updatedUser;
+  }
+
+  // User address methods
+  async getUserAddresses(userId: string): Promise<UserAddress[]> {
+    return Array.from(this.userAddresses.values()).filter(
+      address => address.userId === userId
+    );
+  }
+
+  async createUserAddress(insertAddress: InsertUserAddress): Promise<UserAddress> {
+    const id = randomUUID();
+    const address: UserAddress = { 
+      ...insertAddress, 
+      id,
+      isDefault: insertAddress.isDefault ?? false,
+      createdAt: new Date()
+    };
+    this.userAddresses.set(id, address);
+    return address;
+  }
+
+  async updateUserAddress(id: string, updates: Partial<InsertUserAddress>): Promise<UserAddress | undefined> {
+    const address = this.userAddresses.get(id);
+    if (!address) return undefined;
+    
+    const updatedAddress = { ...address, ...updates };
+    this.userAddresses.set(id, updatedAddress);
+    return updatedAddress;
+  }
+
+  async deleteUserAddress(id: string): Promise<boolean> {
+    return this.userAddresses.delete(id);
+  }
+
+  // Favorites methods
+  async getUserFavorites(userId: string): Promise<(Favorite & { product: Product })[]> {
+    const favorites = Array.from(this.favorites.values()).filter(
+      favorite => favorite.userId === userId
+    );
+    
+    return favorites.map(favorite => {
+      const product = this.products.get(favorite.productId);
+      if (!product) {
+        throw new Error(`Product not found: ${favorite.productId}`);
+      }
+      return { ...favorite, product };
+    });
+  }
+
+  async addToFavorites(insertFavorite: InsertFavorite): Promise<Favorite> {
+    const id = randomUUID();
+    const favorite: Favorite = { 
+      ...insertFavorite, 
+      id,
+      createdAt: new Date()
+    };
+    this.favorites.set(id, favorite);
+    return favorite;
+  }
+
+  async removeFromFavorites(userId: string, productId: string): Promise<boolean> {
+    const favorite = Array.from(this.favorites.entries()).find(
+      ([_, fav]) => fav.userId === userId && fav.productId === productId
+    );
+    
+    if (!favorite) return false;
+    return this.favorites.delete(favorite[0]);
   }
 
   async getProducts(): Promise<Product[]> {
@@ -449,6 +556,27 @@ export class MemStorage implements IStorage {
 
   async getOrder(id: string): Promise<Order | undefined> {
     return this.orders.get(id);
+  }
+
+  // Initialize admin user for testing
+  private async initializeAdminUser() {
+    try {
+      const hashedPassword = await bcrypt.hash('admin123', 10);
+      const adminUser: User = {
+        id: randomUUID(),
+        username: 'admin',
+        email: 'admin@sportzone.uz',
+        firstName: 'Admin',
+        lastName: 'User',
+        password: hashedPassword,
+        isAdmin: true,
+        createdAt: new Date(),
+      };
+      this.users.set(adminUser.id, adminUser);
+      console.log('Admin user initialized: admin@sportzone.uz / admin123');
+    } catch (error) {
+      console.error('Failed to initialize admin user:', error);
+    }
   }
 }
 

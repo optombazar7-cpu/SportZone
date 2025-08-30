@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Search, ShoppingCart, Menu, X } from 'lucide-react';
+import { Search, ShoppingCart, Menu, X, User, LogIn, UserPlus, Settings } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useCart } from '@/contexts/cart-context';
+import { useAuth } from '@/contexts/auth-context';
 import { CartModal } from './cart-modal.tsx';
 import logoUrl from '../assets/logo.png';
 
@@ -14,6 +16,7 @@ export function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { getTotalItems } = useCart();
+  const { user, logout } = useAuth();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,8 +78,68 @@ export function Header() {
               </form>
             </div>
             
-            {/* Cart & Mobile Menu */}
+            {/* User Menu, Cart & Mobile Menu */}
             <div className="flex items-center space-x-4">
+              {/* User Menu */}
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" data-testid="user-menu-trigger">
+                      <div className="w-8 h-8 hero-gradient rounded-full flex items-center justify-center">
+                        <User className="h-4 w-4 text-white" />
+                      </div>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <div className="flex items-center justify-start gap-2 p-2">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium">{user.firstName} {user.lastName}</p>
+                        <p className="text-xs text-muted-foreground">{user.email}</p>
+                      </div>
+                    </div>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/profile" className="cursor-pointer" data-testid="menu-profile">
+                        <User className="mr-2 h-4 w-4" />
+                        Profil
+                      </Link>
+                    </DropdownMenuItem>
+                    {user.isAdmin && (
+                      <>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                          <Link href="/admin" className="cursor-pointer" data-testid="menu-admin">
+                            <Settings className="mr-2 h-4 w-4" />
+                            Admin Panel
+                          </Link>
+                        </DropdownMenuItem>
+                      </>
+                    )}
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={logout} className="cursor-pointer text-red-600" data-testid="menu-logout">
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Chiqish
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <div className="hidden lg:flex items-center space-x-2">
+                  <Button variant="ghost" size="sm" asChild data-testid="button-login">
+                    <Link href="/login">
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Kirish
+                    </Link>
+                  </Button>
+                  <Button size="sm" asChild data-testid="button-register">
+                    <Link href="/register">
+                      <UserPlus className="mr-2 h-4 w-4" />
+                      Ro'yxat
+                    </Link>
+                  </Button>
+                </div>
+              )}
+
+              {/* Cart */}
               <Button
                 variant="ghost"
                 size="icon"

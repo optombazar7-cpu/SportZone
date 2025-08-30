@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useMutation } from '@tanstack/react-query';
-import { ArrowLeft, CreditCard, MapPin, Phone, User } from 'lucide-react';
+import { ArrowLeft, CreditCard, MapPin, Phone, User, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useCart } from '@/contexts/cart-context';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
@@ -28,6 +29,8 @@ export default function Checkout() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [paymentStage, setPaymentStage] = useState<'processing' | 'success' | 'failed'>('processing');
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('uz-UZ').format(price) + " so'm";
@@ -84,6 +87,46 @@ export default function Checkout() {
     },
   });
 
+  const simulatePaymentProcess = async (paymentMethod: string) => {
+    setPaymentStage('processing');
+    setShowPaymentModal(true);
+
+    // Simulate payment processing time (2-4 seconds)
+    const processingTime = Math.random() * 2000 + 2000;
+    await new Promise(resolve => setTimeout(resolve, processingTime));
+
+    // 90% success rate for demo purposes
+    const isSuccessful = Math.random() > 0.1;
+    
+    if (isSuccessful) {
+      setPaymentStage('success');
+      // Process order after successful payment
+      setTimeout(() => {
+        const orderData: OrderRequest = {
+          order: {
+            customerName: formData.customerName,
+            customerPhone: formData.customerPhone,
+            customerEmail: formData.customerEmail || undefined,
+            deliveryAddress: formData.deliveryAddress,
+            paymentMethod: formData.paymentMethod,
+            totalAmount: getTotalPrice(),
+          },
+          items: cartItems.map(item => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            size: item.size || undefined,
+            price: item.product.price,
+          })),
+        };
+
+        createOrderMutation.mutate(orderData);
+        setShowPaymentModal(false);
+      }, 2000);
+    } else {
+      setPaymentStage('failed');
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -100,24 +143,30 @@ export default function Checkout() {
       return;
     }
 
-    const orderData: OrderRequest = {
-      order: {
-        customerName: formData.customerName,
-        customerPhone: formData.customerPhone,
-        customerEmail: formData.customerEmail || undefined,
-        deliveryAddress: formData.deliveryAddress,
-        paymentMethod: formData.paymentMethod,
-        totalAmount: getTotalPrice(),
-      },
-      items: cartItems.map(item => ({
-        productId: item.productId,
-        quantity: item.quantity,
-        size: item.size || undefined,
-        price: item.product.price,
-      })),
-    };
+    // If cash payment, process immediately
+    if (formData.paymentMethod === 'cash') {
+      const orderData: OrderRequest = {
+        order: {
+          customerName: formData.customerName,
+          customerPhone: formData.customerPhone,
+          customerEmail: formData.customerEmail || undefined,
+          deliveryAddress: formData.deliveryAddress,
+          paymentMethod: formData.paymentMethod,
+          totalAmount: getTotalPrice(),
+        },
+        items: cartItems.map(item => ({
+          productId: item.productId,
+          quantity: item.quantity,
+          size: item.size || undefined,
+          price: item.product.price,
+        })),
+      };
 
-    createOrderMutation.mutate(orderData);
+      createOrderMutation.mutate(orderData);
+    } else {
+      // For digital payments, simulate payment process
+      simulatePaymentProcess(formData.paymentMethod);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -380,6 +429,98 @@ export default function Checkout() {
           </div>
         </form>
       </div>
+
+      {/* Payment Processing Modal */}
+      <Dialog open={showPaymentModal} onOpenChange={setShowPaymentModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center justify-center">
+              {paymentStage === 'processing' && (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  To'lov amalga oshirilmoqda...
+                </>
+              )}
+              {paymentStage === 'success' && (
+                <>
+                  <CheckCircle className="mr-2 h-5 w-5 text-green-600" />
+                  To'lov muvaffaqiyatli!
+                </>
+              )}
+              {paymentStage === 'failed' && (
+                <>
+                  <XCircle className="mr-2 h-5 w-5 text-red-600" />
+                  To'lov muvaffaqiyatsiz
+                </>
+              )}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="text-center py-6">
+            {paymentStage === 'processing' && (
+              <div className="space-y-4">
+                <div className="mx-auto w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+                <div>
+                  <p className="text-lg font-medium mb-2">
+                    {formData.paymentMethod === 'click' && 'Click orqali to\'lov...'}
+                    {formData.paymentMethod === 'payme' && 'Payme orqali to\'lov...'}
+                    {formData.paymentMethod === 'uzcard' && 'Uzcard orqali to\'lov...'}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Iltimos, kuting. To'lov amalga oshirilmoqda.
+                  </p>
+                </div>
+              </div>
+            )}
+            
+            {paymentStage === 'success' && (
+              <div className="space-y-4">
+                <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <CheckCircle className="w-8 h-8 text-green-600" />
+                </div>
+                <div>
+                  <p className="text-lg font-medium mb-2 text-green-600">
+                    To'lov muvaffaqiyatli amalga oshirildi!
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Buyurtmangiz qabul qilindi va tez orada ishlanadi.
+                  </p>
+                </div>
+              </div>
+            )}
+            
+            {paymentStage === 'failed' && (
+              <div className="space-y-4">
+                <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+                  <XCircle className="w-8 h-8 text-red-600" />
+                </div>
+                <div>
+                  <p className="text-lg font-medium mb-2 text-red-600">
+                    To'lov amalga oshmadi
+                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    To'lov jarayonida xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.
+                  </p>
+                  <div className="space-y-2">
+                    <Button 
+                      onClick={() => simulatePaymentProcess(formData.paymentMethod)}
+                      className="w-full"
+                    >
+                      Qaytadan urinish
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setShowPaymentModal(false)}
+                      className="w-full"
+                    >
+                      Bekor qilish
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
