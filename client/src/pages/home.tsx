@@ -73,7 +73,7 @@ export default function Home() {
         
         <div className="relative container mx-auto px-4 text-white z-10">
           <div className="max-w-2xl">
-            <h1 className="text-4xl lg:text-6xl font-poppins font-bold mb-6 leading-tight text-white" data-testid="hero-title">
+            <h1 className="text-4xl lg:text-6xl font-poppins font-bold mb-6 leading-tight text-black" data-testid="hero-title">
               Sport Maqsadlaringizga <span className="text-accent">Erishish</span> Vaqti!
             </h1>
             <p className="text-lg lg:text-xl mb-8 text-white/90 font-inter" data-testid="hero-description">
