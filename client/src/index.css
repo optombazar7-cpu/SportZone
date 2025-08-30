@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&family=Montserrat:wght@600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0 0% 98%);
+  --foreground: hsl(224 15% 15%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(224 15% 15%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(224 15% 15%);
+  --primary: hsl(217 91% 60%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(4 86% 58%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(220 7% 94%);
+  --muted-foreground: hsl(220 9% 46%);
+  --accent: hsl(25 95% 53%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(220 13% 91%);
+  --input: hsl(220 13% 91%);
+  --ring: hsl(217 91% 60%);
+  --radius: 8px;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+}
+
+.dark {
+  --background: hsl(224 15% 10%);
+  --foreground: hsl(0 0% 95%);
+  --card: hsl(224 15% 12%);
+  --card-foreground: hsl(0 0% 95%);
+  --popover: hsl(224 15% 10%);
+  --popover-foreground: hsl(0 0% 95%);
+  --primary: hsl(217 91% 60%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(4 86% 58%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(224 15% 20%);
+  --muted-foreground: hsl(220 9% 60%);
+  --accent: hsl(25 95% 53%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(224 15% 20%);
+  --input: hsl(224 15% 20%);
+  --ring: hsl(217 91% 60%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+  }
+
+  .product-card {
+    transition: all 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .cart-badge {
+    animation: pulse 2s infinite;
+  }
+
+  .mobile-menu {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .mobile-menu.open {
+    transform: translateX(0);
+  }
+
+  .btn-primary {
+    @apply bg-primary hover:opacity-90 text-primary-foreground transition-opacity;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary hover:opacity-90 text-secondary-foreground transition-opacity;
+  }
+
+  .btn-accent {
+    @apply bg-accent hover:opacity-90 text-accent-foreground transition-opacity;
+  }
+
+  .font-poppins {
+    font-family: var(--font-poppins);
+  }
+
+  .font-inter {
+    font-family: var(--font-inter);
+  }
+
+  .font-montserrat {
+    font-family: var(--font-montserrat);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.05); 
+  }
+}
