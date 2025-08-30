@@ -44,8 +44,8 @@ export function ProductCard({ product, showQuickAdd = true }: ProductCardProps) 
     : 0;
 
   return (
-    <Link href={`/product/${product.id}`}>
-      <div className="bg-card rounded-xl shadow-lg overflow-hidden product-card group cursor-pointer" data-testid={`product-card-${product.id}`}>
+    <div className="bg-card rounded-xl shadow-lg overflow-hidden product-card group cursor-pointer" data-testid={`product-card-${product.id}`}>
+      <Link href={`/product/${product.id}`}>
         <div className="relative">
           <img 
             src={product.imageUrl} 
@@ -89,27 +89,27 @@ export function ProductCard({ product, showQuickAdd = true }: ProductCardProps) 
               </span>
             )}
           </div>
-          
-          {showQuickAdd && (
-            <div className="flex items-center justify-between">
-              <Link href={`/product/${product.id}`}>
-                <Button variant="outline" size="sm" data-testid={`view-details-${product.id}`}>
-                  Batafsil
-                </Button>
-              </Link>
-              
-              <Button 
-                size="sm" 
-                className="btn-accent"
-                onClick={handleAddToCart}
-                data-testid={`add-to-cart-${product.id}`}
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-          )}
         </div>
-      </div>
-    </Link>
+      </Link>
+      
+      {showQuickAdd && (
+        <div className="flex items-center justify-between p-4 pt-0">
+          <Link href={`/product/${product.id}`}>
+            <Button variant="outline" size="sm" data-testid={`view-details-${product.id}`}>
+              Batafsil
+            </Button>
+          </Link>
+          
+          <Button 
+            size="sm" 
+            className="btn-accent"
+            onClick={handleAddToCart}
+            data-testid={`add-to-cart-${product.id}`}
+          >
+            <Plus className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+    </div>
   );
 }

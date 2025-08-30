@@ -71,17 +71,17 @@ export default function Home() {
           />
         </div>
         
-        <div className="relative container mx-auto px-4 text-white">
+        <div className="relative container mx-auto px-4 text-white z-10">
           <div className="max-w-2xl">
-            <h1 className="text-4xl lg:text-6xl font-poppins font-bold mb-6 leading-tight" data-testid="hero-title">
+            <h1 className="text-4xl lg:text-6xl font-poppins font-bold mb-6 leading-tight text-white" data-testid="hero-title">
               Sport Maqsadlaringizga <span className="text-accent">Erishish</span> Vaqti!
             </h1>
-            <p className="text-lg lg:text-xl mb-8 opacity-90 font-inter" data-testid="hero-description">
+            <p className="text-lg lg:text-xl mb-8 text-white/90 font-inter" data-testid="hero-description">
               Eng sifatli sport mahsulotlari va jihozlari bilan o'zingizni yangi bosqichga olib chiqing. Professional sportchilar tanlovini kashf eting.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/products">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-montserrat font-semibold text-lg" data-testid="hero-shop-button">
+                <Button size="lg" className="btn-accent font-montserrat font-semibold text-lg" data-testid="hero-shop-button">
                   Xarid qilish
                 </Button>
               </Link>
