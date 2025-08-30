@@ -18,6 +18,8 @@ export const products = pgTable("products", {
   category: text("category").notNull(),
   subcategory: text("subcategory"),
   imageUrl: text("image_url").notNull(),
+  images: text("images").array(),
+  videoUrl: text("video_url"),
   sizes: text("sizes").array(),
   inStock: boolean("in_stock").default(true),
   isSpecialOffer: boolean("is_special_offer").default(false),

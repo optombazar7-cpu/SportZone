@@ -107,14 +107,15 @@ export default function ProductDetail() {
         </Button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Product Image */}
+          {/* Product Images and Video */}
           <div className="space-y-4">
+            {/* Main Image */}
             <div className="relative overflow-hidden rounded-lg bg-gray-100">
               <img
                 src={product.imageUrl}
                 alt={product.name}
                 className="w-full h-96 lg:h-[500px] object-cover"
-                data-testid="product-image"
+                data-testid="product-main-image"
               />
               
               {/* Badges */}
@@ -136,6 +137,43 @@ export default function ProductDetail() {
                 )}
               </div>
             </div>
+            
+            {/* Additional Images Gallery */}
+            {product.images && product.images.length > 0 && (
+              <div className="space-y-2">
+                <h3 className="text-sm font-medium text-foreground">Qo'shimcha rasmlar</h3>
+                <div className="grid grid-cols-4 gap-2">
+                  {product.images.map((image, index) => (
+                    <div key={index} className="relative overflow-hidden rounded-md bg-gray-100">
+                      <img
+                        src={image}
+                        alt={`${product.name} - Rasm ${index + 1}`}
+                        className="w-full h-20 object-cover hover:scale-105 transition-transform cursor-pointer"
+                        data-testid={`product-image-${index + 1}`}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Video Section */}
+            {product.videoUrl && (
+              <div className="space-y-2">
+                <h3 className="text-sm font-medium text-foreground">Mahsulot videosi</h3>
+                <div className="relative overflow-hidden rounded-lg bg-gray-100">
+                  <iframe
+                    src={product.videoUrl}
+                    title={`${product.name} - Video`}
+                    className="w-full h-64 lg:h-80"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    data-testid="product-video"
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Product Info */}
