@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/contexts/cart-context';
 import { CartModal } from './cart-modal.tsx';
+import logoUrl from '../assets/logo.png';
 
 export function Header() {
   const [, setLocation] = useLocation();
@@ -37,13 +38,12 @@ export function Header() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2" data-testid="logo-link">
-              <div className="w-8 h-8 lg:w-10 lg:h-10 hero-gradient rounded-lg flex items-center justify-center">
-                <i className="fas fa-dumbbell text-white text-lg lg:text-xl"></i>
-              </div>
-              <span className="text-xl lg:text-2xl font-poppins font-bold text-foreground">
-                SportZone
-              </span>
+            <Link href="/" className="flex items-center space-x-3" data-testid="logo-link">
+              <img 
+                src={logoUrl} 
+                alt="SportZone Logo" 
+                className="h-10 lg:h-12 w-auto object-contain"
+              />
             </Link>
             
             {/* Desktop Navigation */}
@@ -114,7 +114,11 @@ export function Header() {
         <div className={`mobile-menu fixed top-0 left-0 w-full h-full bg-background z-50 lg:hidden ${isMenuOpen ? 'open' : ''}`}>
           <div className="p-4">
             <div className="flex justify-between items-center mb-8">
-              <span className="text-xl font-poppins font-bold">SportZone</span>
+              <img 
+                src={logoUrl} 
+                alt="SportZone Logo" 
+                className="h-8 w-auto object-contain"
+              />
               <Button
                 variant="ghost"
                 size="icon"
