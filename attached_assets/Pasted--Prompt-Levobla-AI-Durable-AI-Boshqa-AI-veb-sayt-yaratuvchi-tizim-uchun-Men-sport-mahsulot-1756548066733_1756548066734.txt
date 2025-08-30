@@ -1,0 +1,36 @@
+✅ Prompt (Levobla AI / Durable AI / Boshqa AI veb-sayt yaratuvchi tizim uchun):
+"Men sport mahsulotlari sotadigan onlayn do'kon ochmoqchiman. Iltimos, professional, zamonaviy va foydalanuvchi uchun qulay dizaynga ega bo'lgan veb-sayt yaratib bering. Sayt quyidagi funksiyalarga ega bo'lsin:
+
+Bosh sahifa: Yangi, ajoyib dizaynli bosh sahifa, unda katta rasmlar, "Aksiyadagi mahsulotlar", "Yangi kelganlar", "Eng ko'p sotilganlar" bo'limlari.
+Mahsulotlar bo'limi: Sport kiyim-kechak, poyabzal, sport jihozlari (masalan, fitnes rezinalari, to'plar, sport soxtalari) kategoriyalarga bo'lingan holda.
+Mahsulot sahifasi: Har bir mahsulot uchun alohida sahifa — rasm, nomi, narxi, tavsifi, o'lcham tanlovi, soni, "Savatga qo'shish" tugmasi.
+Savat: Foydalanuvchi mahsulotlarni savatga qo'sha olsin, ularni o'chirib yoki miqdorini o'zgartira olsin.
+Buyurtma berish: Oddiy buyurtma jarayoni — yetkazib berish manzili, to'lov usuli (Click, Payme, Naqd), buyurtmani tasdiqlash.
+Aloqa sahifasi: Kontakt ma'lumotlari, xarita, murojaat formasi.
+Responsive dizayn: Sayt kompyuter, planshet va telefonlarda ham ajoyib ko'rinishi kerak.
+Tillar: O'zbek tili asosiy, keyin rus yoki ingliz tilini qo'shish imkoniyati.
+SEO sozlamalari: Mahsulot tavsiflari, sarlavhalar SEO uchun optimallashtirilgan bo'lsin.
+Dizayn: Yangi, zamonaviy, sportga mos dinamik ranglar (masalan, ko'k, qizil, oq, jigar ranglari). Headerda logotip, menyu (Bosh sahifa, Mahsulotlar, Aksiyalar, Aloqa), qidiruv maydoni, savat ikonkasi. Orqa fonda harakatdagi odamlar, sportda band bo'lgan odamlar rasmlari. Har bir sahifa aniq CTA (Call to Action) tugmalarga ega bo'lsin ('Xarid qilish', 'Batafsil', 'Tezda xarid qilish').
+
+Iltimos, barcha sahifalar uchun HTML, CSS, JS kodlarini yoki agar tizim to'g'ridan-to'g'ri sayt yaratsa, buni darhol amalga oshiring. Sayt tez ishlashi, yuklanish vaqti qisqa bo'lsin." 
+
+🎨 Dizayn maslahatlari:
+Ranglar:
+Asosiy: Oq + ko'k yoki qizil (sport energiyasini anglatadi).
+Qo'shimcha: Jigar, kulrang, qora (profesionallik uchun).
+Shriftlar:
+Sarlavhalar uchun qalin, zamonaviy sans-serif shrift (masalan, Poppins, Montserrat).
+Tavsiflar uchun oson o'qiladigan shrift (masalan, Open Sans).
+Rasmlar:
+Faqat yuqori sifatli, haqiqiy sport mahsulotlari rasmlari.
+Foydalanuvchilar sport bilan shug'ullanayotgan holatda (masalan, yugurayotgan odam, fitnes qilayotgan ayol).
+Tajriba (UX):
+Mahsulotni bir marta bosishda savatga qo'shish.
+Tez qidiruv tizimi.
+Mobil menyuda ham qulay navigatsiya.
+💡 Qo'shimcha maslahat:
+Agar siz Durable AI dan foydalansangiz (durable.co), u avtomatik ravishda biznes-sayt yaratadi. Shu yerda shunday prompt yozing:
+
+"Create an e-commerce website for selling sports products like sportswear, shoes, and fitness equipment. The website should be in Uzbek language, modern design, with product catalog, shopping cart, contact form, and fast checkout. Include sections: Home, Products, Special Offers, About Us, Contact. Use dynamic images of athletes and clean layout." 
+
+Agar siz qaysi AI tizimdan foydalanayotganingizni aniqroq aytasiz (masalan: Durable, 11st, Wix ADI, lovable.dev), unda unga mos aniqroq prompt tayyorlab beraman.
